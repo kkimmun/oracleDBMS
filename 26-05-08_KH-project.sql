@@ -1,0 +1,31 @@
+-- 회원번호 --1,2,3,... 들어갈 값이 어떤 값인가??
+-- 아이디 -- user01, user01,...
+-- 비밀번호 -- pass01, pass02,...
+-- 이름	-- 홍길동, 고길동, ...
+-- 이메일	-- kh@kh.com, kh@naver.com, ...
+-- 가입일	-- SYSDATE
+-- 회원정보수정일 -SYSDATE
+-- 삭제여부	-'Y' / 'N'
+
+CREATE TABLE WEB_MEMBER(
+	USER_NO NUMBER PRIMARY KEY,
+	USER_ID VARCHAR2(30) UNIQUE NOT NULL,
+	USER_PWD VARCHAR2(30) NOT NULL,
+	USER_NAME NVARCHAR2(20) NOT NULL,
+	EMAIL VARCHAR2(30) NOT NULL,
+	ENROLL_DATE DATE DEFAULT SYSDATE,
+	MODIFY_DATE DATE DEFAULT SYSDATE,
+	STATUS CHAR(1) DEFAULT 'N' CHECK(STATUS IN ('Y','N'))
+);
+CREATE SEQUENCE SEQ_MEMBER_NO NOCACHE;
+SELECT * FROM WEB_MEMBER;
+INSERT INTO WEB_MEMBER
+	VALUES (SEQ_MEMBER_NO.NEXTVAL,
+			'admin',
+			'1234',
+			'관리자',
+			'admin@kh.com',
+			SYSDATE,
+			SYSDATE,
+			'N');
+
